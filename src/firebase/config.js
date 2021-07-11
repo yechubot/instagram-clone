@@ -20,5 +20,6 @@ firebase.initializeApp(firebaseConfig);
 //스토리지 & 스토어 초기화 
 const projectStorage = firebase.storage();
 const projectFirestore = firebase.firestore();
+const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export{projectStorage, projectFirestore}; 
+export{projectStorage, projectFirestore, timestamp}; 

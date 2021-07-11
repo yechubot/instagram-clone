@@ -1,18 +1,25 @@
 import React from 'react';
-import useStorage from './useStorage';
+import { useEffect } from 'react';
+import useStorage from '../hooks/useStorage';
+import { motion } from 'framer-motion';
 
+const ProgressBar = ({ file, setFile }) => {
 
-const ProgressBar = ({file,setFile}) => {
+    const { url, progress } = useStorage(file);
 
-    const {url, progress} = useStorage(file);
-    console.log(progress,url);
+    useEffect(() => {
+        if (url) {
+            setFile(null); // url 생기면 프로그레스바 안보이도록 
+        }
+    }, [url, setFile])
 
-    return ( 
-        <div className="progress-bar" 
-        style={{width : progress + '%'}}>
-            progress
-        </div>
-     );
+    return (
+        <motion.div className="progress-bar"
+            initial={{ width: 0 }}
+            animate={{ width: progress + '%' }}
+        >
+        </motion.div>
+    );
 }
- 
+
 export default ProgressBar;
